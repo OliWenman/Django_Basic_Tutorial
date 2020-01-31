@@ -1,11 +1,13 @@
 <!-- How to comment -->
 
-{{ "Welcome to Oli's website." }}
+<h3>Welcome to Oli's website.</h3>
+<p>Code avaliable at <a href="https://github.com/OliWenman/" title="OliWenman Github" target="_blank">my github page</a>.</p>
+
 {{ "Polling App, please pick a question." }}
 {% if latest_question_list %}
 	<ul>
 	{% for question in latest_question_list %}
-		<li><a href = "{% url 'polls:detail' question.id %}"> {{ question.question_text }}</a></li>
+		<li><a href = "{% url 'Polls_App:detail' question.id %}"> {{ question.question_text }}</a></li>
 
 	{% endfor %}
 	</ul>

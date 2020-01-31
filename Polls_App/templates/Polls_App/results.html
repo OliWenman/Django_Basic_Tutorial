@@ -1,0 +1,13 @@
+<h3>Welcome to Oli's website.</h3>
+<h4>{{ question.question_text }}</h4>
+
+<!--Use post when altering data in server-->
+<ul>
+{% for choice in question.choice_set.all %}
+	<li>
+		{{ choice.choice_text  }} got {{ choice.votes }} vote{{ choice.votes|pluralize }}
+	</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'Polls_App:detail' question.id %}"> Vote again? </a>
