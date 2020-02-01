@@ -60,12 +60,6 @@ def vote(request, question_id):
 
 	try:
 
-		#if request.method=="POST":
-
- 		#	choice = request.POST.get('choice', None)
- 		#	if choice is not None:
-
- 		#		selected_choice = question.choice_set.get(pk=choice)
  		selected_choice = question.choice_set.get(pk = request.POST['choice'])
 
 
@@ -78,10 +72,12 @@ def vote(request, question_id):
 					   'error_message': "You didn't select a choice."})
 
 	else:
+		
 		selected_choice.votes += 1
+
 		selected_choice.save()
 		selected_choice.refresh_from_db()
-
+		print (selected_choice.votes)
 		#Always return an HttpResponseRedirect after succesfully dealing
 		#with POST data. This prevents data from being posted twice if
 		#if a user hits the back button
