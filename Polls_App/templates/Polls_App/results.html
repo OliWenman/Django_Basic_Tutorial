@@ -1,15 +1,42 @@
-<h3>Welcome to Oli's website.</h3>
-<h4>{{ question.question_text }}</h4>
 
-<!--Use post when altering data in server-->
-<ul>
-{% for choice in question.choice_set.all %}
-	<li>
-		{{ choice.choice_text  }} got {{ choice.votes }} vote{{ choice.votes|pluralize }}
-	</li>
-{% endfor %}
-</ul>
+{% load static %}
 
-<a href="{% url 'Polls_App:detail' question.id %}"> Vote again? </a>
+<link rel = "stylesheet" type = "text/css" href = "{% static 'Polls_App/style.css' %}">
 
-<p> <a href="{% url 'Polls_App:index' %}"> Return home. </a> </p>
+<header>
+
+	Welcome to Oli's website.
+
+</header>
+
+<section>
+
+	{{ question.question_text }}
+	
+	<!--Use post when altering data in server-->
+	<ul>
+
+		{% for choice in question.choice_set.all %}
+
+			<li>
+
+				{{ choice.choice_text  }} got {{choice.votes_percentage}}<span>&#37;</span>
+
+			</li>
+
+		{% endfor %}
+
+	</ul>
+
+	<p>Total number of votes is {{question.no_votes}}</p>
+
+	<a href="{% url 'Polls_App:detail' question.id %}"> Vote again? </a>
+
+	<p> <a href="{% url 'Polls_App:index' %}"> Return home. </a> </p>
+
+</section>
+
+<footer>
+	
+</footer>
+

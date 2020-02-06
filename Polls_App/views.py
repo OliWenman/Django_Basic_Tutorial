@@ -18,8 +18,9 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views import generic
 
-from .models import Choice, Question
-from django.utils import timezone
+from .models import Choice, Question #, UploadFileForm
+from django.utils import timezone 
+
 
 class IndexView(generic.ListView):
 
@@ -72,17 +73,47 @@ def vote(request, question_id):
 					   'error_message': "You didn't select a choice."})
 
 	else:
-		
+
 		selected_choice.votes += 1
+		question.no_votes += 1
+
+		question.save()
+		question.refresh_from_db()
 
 		selected_choice.save()
 		selected_choice.refresh_from_db()
-		print (selected_choice.votes)
+
+		for choice in question.choice_set.all():
+
+			choice.votes_percentage = (choice.votes/question.no_votes) * 100.
+			choice.save()
+
+
 		#Always return an HttpResponseRedirect after succesfully dealing
 		#with POST data. This prevents data from being posted twice if
 		#if a user hits the back button
 		return HttpResponseRedirect(reverse('Polls_App:results', args=(question.id,)))
 
+"""
+def handle_uploaded_file(f):
+
+	with open('some/file/name.txt', 'wb+') as destination:
+		for chunk in f.chunks():
+			destination.write(chunk)
+
+
+def upload_file(request):
 	
+	if request.method == 'POST':
+		form = UploadFileForm(request.Post, render.FILES)
 
+		if form.is_valid():
 
+			handle_upload_file(request.FILES['file'])
+			return HttpResponseRedirect('/success/url')
+
+		else:
+			form = UploadFileForm()
+
+		return render(request, 'upload.html', {'form': form})
+"""

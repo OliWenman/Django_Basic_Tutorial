@@ -3,9 +3,40 @@
 
 <link rel = "stylesheet" type = "text/css" href = "{% static 'Polls_App/style.css' %}">
 
+<header>
+	Welcome to Oli's Website.
+</header>
+
+<section>
+	<p>Code avaliable at <a href="https://github.com/OliWenman/" title="OliWenman Github" target="_blank"> my github page</a>.</p>
+</section>
+
+<section>
+	{{ "Polling App, please pick a question." }}
+	{% if latest_question_list %}
+		<ul>
+
+			{% for question in latest_question_list %}
+
+				<li><a href = "{% url 'Polls_App:detail' question.id %}"> {{ question.question_text }}</a></li>
+
+			{% endfor %}
+
+		</ul>
+
+	{% else %}
+
+		<p>No polls are available. Please come back later.</p>
+
+	{% endif %}
+</section>
+
+<footer></footer>
+
 <!-- How to comment -->
 
-<h3>Welcome to Oli's website.</h3>
+<!-- 
+<h1>Welcome to Oli's website.</h1>
 <p>Code avaliable at <a href="https://github.com/OliWenman/" title="OliWenman Github" target="_blank">my github page</a>.</p>
 
 {{ "Polling App, please pick a question." }}
@@ -20,3 +51,5 @@
 	{% else %}
 		<p>No polls are available.</p>
 {% endif %}
+
+-->

@@ -1,7 +1,31 @@
-li a {
-	color: green;
+body {
+  background: rgb(58,58,58);
+  color: white;
+  font-family: Helvetica-neue, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 10px;
 }
 
-/*body {
-    background: white url("images/cat.png") repeat;
-}*/
+header {
+  background: black;
+  font-size: 30px;
+  color: rgb(0, 130, 255)
+  padding: 50px;
+}
+
+section {
+  background: white;
+  color: rgb(0, 130, 255);
+  padding: 20px;
+}
+
+form {
+	color: rgb(0, 130, 255);
+	background: white;
+}
+
+footer {
+  background: black;
+  color: rgb(0, 130, 255)
+  padding: 10px 20px;
+}

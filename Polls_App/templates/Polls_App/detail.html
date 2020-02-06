@@ -1,21 +1,45 @@
 <!-- How to comment -->
 
-<h3>{{ "Welcome to Oli's website" }}</h3>
+{% load static %}
 
-<h4>{{ question.question_text }}</h4>
+<link rel = "stylesheet" type = "text/css" href = "{% static 'Polls_App/style.css' %}">
 
-{% if error_message %}
-	<p> <strong> {{ error_message }} </strong> </p>
-{% endif %}
 
-<!--Use post when altering data in server--> 
-<form action = "{% url 'Polls_App:vote' question.id %}" method = "post">
-{% csrf_token %}
-{% for choice in question.choice_set.all %}
-	<input type = "radio" name = "choice" id = "choice {{ forloop.counter }}" value = "{{ choice.id }}">
+<header>
 
-	<label for = "choice {{ forloop.counter }}" > {{ choice.choice_text }} </label><br>
+	Welcome to Oli's website.
 
-{% endfor %}
-<input type = "submit" value = "Vote">
-</form>
+</header>
+
+<section>
+
+	{{ question.question_text }}
+
+</section>
+
+	{% if error_message %}
+		<p> <strong> {{ error_message }} </strong> </p>
+	{% endif %}
+
+	<!--Use post when altering data in server--> 
+	<form action = "{% url 'Polls_App:vote' question.id %}" method = "post">
+
+		{% csrf_token %}
+
+		{% for choice in question.choice_set.all %}
+
+			<input type = "radio" name = "choice" id = "choice {{ forloop.counter }}" value = "{{ choice.id }}">
+
+			<label for = "choice {{ forloop.counter }}" > {{ choice.choice_text }} </label><br>
+
+		{% endfor %}
+
+		<input type = "submit" value = "Vote">
+
+	</form>
+
+</section>
+
+<footer>
+	
+</footer>
